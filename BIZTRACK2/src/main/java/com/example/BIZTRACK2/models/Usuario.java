@@ -2,7 +2,11 @@ package com.example.BIZTRACK2.models;
 
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "usuarios")
@@ -20,6 +24,13 @@ public class Usuario {
 
     @Column(name = "contraseña_hash", nullable = false)
     private String contraseñaHash;
+
+
+    //creando una relacion con la tabla registro
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference("registro_usuario") 
+    private List<Registro> registros;
+
 
     // Constructor vacío requerido por JPA
     public Usuario() {
